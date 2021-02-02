@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    tools {
-        maven 'maven'
-        jdk 'jdk8'
-    }
     stages {
         stage ('Initialize') {
             steps {
@@ -16,7 +12,9 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh "mvn clean verify"
+                withMaven {
+                    sh "mvn clean verify"
+                }
             }
         }
     }
