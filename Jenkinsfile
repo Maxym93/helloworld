@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withMaven {
                     sh "mvn clean verify"
-                    }
+                }
             }
         }
     }
