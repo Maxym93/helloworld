@@ -22,9 +22,10 @@ pipeline {
             }
         }
 
-        stage ('Folder ls -l')
+        stage ('Folder ls -l') {
             steps {
-                sh 'ls -lah'
+                sh 'ls -lahtr'
             }
+        }
     }
 }
