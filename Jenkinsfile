@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'maven3'
+    }
     stages {
         stage ('Initialize') {
             steps {
@@ -12,7 +15,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                withMaven(maven: 'maven-3') {
+                withMaven {
                     sh "mvn clean verify"
                 }
             }
