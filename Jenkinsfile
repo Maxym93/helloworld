@@ -21,5 +21,10 @@ pipeline {
                 }
             }
         }
+
+        stage ('Folder ls -l')
+            steps {
+                sh 'ls -lah'
+            }
     }
 }
