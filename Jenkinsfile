@@ -4,22 +4,24 @@ pipeline {
         maven 'maven3'
     }
     stages {
-        stage ('Initialize') {
+        stage ('Git pull') {
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
+                git url: 'https://github.com/ligado/hello-world-servlet.git'
             }
         }
 
-        stage ('Build') {
+        stage ('Test') {
             steps {
-                git url: 'https://github.com/ligado/hello-world-servlet.git'
+                withMaven(maven: 'maven3') {
+                    sh "mvn test"
+                }
+            }
+        }
+
+        stage ('Verify') {
+            steps {
                 withMaven(maven: 'maven3') {
                     sh "mvn clean verify"
-                    sh "mvn test"
-                    sh "mvn build"
                 }
             }
         }
@@ -27,6 +29,7 @@ pipeline {
         stage ('Folder ls -l') {
             steps {
                 sh 'ls -lahtr'
+                sh 'ls -lahtr target'
             }
         }
     }
