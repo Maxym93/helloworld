@@ -15,6 +15,7 @@ pipeline {
 
         stage ('Build') {
             steps {
+                git url: 'https://github.com/ligado/hello-world-servlet.git'
                 withMaven(maven: 'maven3') {
                     sh "mvn clean verify"
                 }
