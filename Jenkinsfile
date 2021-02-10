@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage ('Git pull') {
             steps {
-                git url: 'https://github.com/ligado/hello-world-servlet.git'
+                git url: 'https://github.com/Maxym93/helloworld.git'
             }
         }
 
@@ -26,15 +26,9 @@ pipeline {
             }
         }
 
-        stage ('Git pull Dockerfile') {
+        stage ('Docker build and run') {
             steps {
-                git url: 'https://github.com/Maxym93/helloworld.git'
-            }
-        }
-
-        stage ('Docker build') {
-            steps {
-                sh 'docker build .'
+                sh 'docker build -t my-tomcat . && docker run -d my-tomcat'
             }
         }
     }
