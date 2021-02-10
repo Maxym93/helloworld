@@ -26,10 +26,9 @@ pipeline {
             }
         }
 
-        stage ('Folder ls -l') {
+        stage ('Docker build') {
             steps {
-                sh 'ls -lahtr'
-                sh 'ls -lahtr target'
+                sh 'cd docker && docker build .'
             }
         }
     }
