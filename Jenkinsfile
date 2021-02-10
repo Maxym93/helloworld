@@ -26,9 +26,15 @@ pipeline {
             }
         }
 
+        stage ('Git pull Dockerfile') {
+            steps {
+                git url: 'https://github.com/Maxym93/helloworld.git'
+            }
+        }
+
         stage ('Docker build') {
             steps {
-                sh 'cd docker && docker build .'
+                sh 'docker build .'
             }
         }
     }
