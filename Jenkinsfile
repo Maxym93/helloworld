@@ -17,21 +17,14 @@ pipeline {
                 }
             }
         }
-    parallel {
-        stage ('Build') {
+        parallel {
             steps {
-                withMaven(maven: 'maven3') {
-                    sh "echo Maven $date"
-                    sh "mvn clean verify"
-                }
+                sh "echo 1"
+            }
+            
+            steps {
+                sh "echo 2"
             }
         }
-
-        stage ('Echo') {
-            steps {
-                sh "echo ECHO $date"
-            }
-        }
-    }
     }
 }
