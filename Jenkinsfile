@@ -17,19 +17,22 @@ pipeline {
                 }
             }
         }
+        parallel {
+            stage ('Build') {
+                steps {
+                    withMaven(maven: 'maven3') {
+                        sh "echo Maven $date"
+                        sh "mvn clean verify"
+                    }
+                }
+            }
 
-        stage ('Verify') {
-            steps {
-                withMaven(maven: 'maven3') {
-                    sh "mvn clean verify"
+            stage ('Echo') {
+                steps {
+                    sh "echo ECHO $date"
                 }
             }
         }
-
-        stage ('Docker build and run') {
-            steps {
-                sh 'docker build -t my-tomcat . && docker run -d my-tomcat'
-            }
-        }
+        
     }
 }
