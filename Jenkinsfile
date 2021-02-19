@@ -17,14 +17,5 @@ pipeline {
                 }
             }
         }
-        parallel {
-            steps {
-                sh "echo 1"
-            }
-            
-            steps {
-                sh "echo 2"
-            }
-        }
     }
 }
