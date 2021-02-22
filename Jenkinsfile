@@ -27,9 +27,10 @@ pipeline {
             }
         }
 
-        def app
         stage ('Docker') {
-          app = docker.build("my_test")
+            steps {
+                docker.build("my_test")
+            }
         }
     }
 
