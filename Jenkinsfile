@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maven3'
+        docker 'docker'
     }
     stages {
         stage ('Git pull') {
@@ -26,13 +27,10 @@ pipeline {
             }
         }
 
-        agent { dockerfile true }
-        stages {
-        stage('Test') {
+        stage ('Docker') {
             steps {
-                mvn test
+                sh "docker -version"
             }
-        }
         }
     }
 }
