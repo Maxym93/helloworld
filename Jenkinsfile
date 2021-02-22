@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def app
     tools {
         maven 'maven3'
         dockerTool 'docker'
