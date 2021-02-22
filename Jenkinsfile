@@ -29,7 +29,9 @@ pipeline {
 
         stage ('Docker') {
             steps {
-                docker.build("my_test")
+                script {
+                    docker.build("my_test")
+                }
             }
         }
     }
