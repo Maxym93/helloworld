@@ -4,36 +4,34 @@ pipeline {
         maven 'maven3'
         dockerTool 'docker'
     }
-    node {
-        def app
-        stages {
-            stage ('Git pull') {
-                steps {
-                    git url: 'https://github.com/Maxym93/helloworld.git'
-                }
+    stages {
+        stage ('Git pull') {
+            steps {
+                git url: 'https://github.com/Maxym93/helloworld.git'
             }
+        }
 
-            stage ('Test') {
-                steps {
-                    withMaven(maven: 'maven3') {
-                        sh "mvn test"
-                    }
-                }
-            }
-            
-            stage ('Build') {
-                steps {
-                    withMaven(maven: 'maven3') {
-                        sh "mvn clean verify"
-                    }
-                }
-            }
-
-            stage ('Docker') {
-                steps {
-                    app = docker.build("my_test")
+        stage ('Test') {
+            steps {
+                withMaven(maven: 'maven3') {
+                    sh "mvn test"
                 }
             }
         }
+
+        stage ('Build') {
+            steps {
+                withMaven(maven: 'maven3') {
+                    sh "mvn clean verify"
+                }
+            }
+        }
+    }
+}
+
+node {
+    def app
+    stage ('Docker') {
+        app = docker.build("my_test")
     }
 }
