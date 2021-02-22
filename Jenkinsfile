@@ -26,10 +26,13 @@ pipeline {
             }
         }
 
-        stage ('Docker build') {
+        agent { dockerfile true }
+        stages {
+        stage('Test') {
             steps {
-                docker.build
+                mvn test
             }
+        }
         }
     }
 }
