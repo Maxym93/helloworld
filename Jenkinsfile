@@ -27,12 +27,10 @@ pipeline {
             }
         }
     }
-
-    node {
-        def app
-        stage ('Docker') {
-            app = docker.build("my_test")
-        }
+    
+    def app
+    stage ('Docker') {
+        app = docker.build("my_test")
     }
 
     post { 
