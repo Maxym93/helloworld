@@ -29,9 +29,7 @@ pipeline {
 
         stage ('Docker') {
             steps {
-                sh "docker --version"
-                sh "docker ps -a"
-                sh "docker images -a"
+                app = docker.build("my_test")
             }
         }
     }
