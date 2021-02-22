@@ -27,11 +27,18 @@ pipeline {
             }
         }
     }
-}
 
-node {
-    def app
-    stage ('Docker') {
-        app = docker.build("my_test")
+    node {
+        def app
+        stage ('Docker') {
+            app = docker.build("my_test")
+        }
+    }
+
+    post { 
+        always { 
+            cleanWs()
+        }
     }
 }
+
