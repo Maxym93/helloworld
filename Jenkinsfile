@@ -17,11 +17,18 @@ pipeline {
                 }
             }
         }
+        
         stage ('Build') {
             steps {
                 withMaven(maven: 'maven3') {
                     sh "mvn clean verify"
                 }
+            }
+        }
+
+        stage ('Docker build') {
+            steps {
+                docker.build
             }
         }
     }
